@@ -11,4 +11,6 @@ class RoutesName {
   static const String forgotPassword = "forgot_password_screen";
 
   static const String home = "home_screen";
+ 
+  static const String main = "main_screen";
 }
