@@ -5,9 +5,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final int? index;
   final bool isCenter, isBorder;
   final Color backgroundColor;
-  final String? title;
+  final String? title, image;
   final TextStyle? titleStyle;
   final Function()? onTapDrawer, onTapAction;
+  final double? height;
   final Widget? bottom;
 
   const MyAppBar({
@@ -15,6 +16,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.isBorder = true,
     this.isCenter = true,
     this.index,
+    this.image,
+    this.height,
     this.backgroundColor = Colors.white,
     this.title,
     this.titleStyle,
@@ -62,9 +65,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     Style.title.copyWith(
                       fontSize: 28,
                     ))
-            : null);
+            : image != null
+                ? Image.asset(
+                    image!,
+                    height: 40,
+                    width: 40,
+                  )
+                : null);
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 40);
+  Size get preferredSize => Size.fromHeight(height ?? kToolbarHeight);
 }

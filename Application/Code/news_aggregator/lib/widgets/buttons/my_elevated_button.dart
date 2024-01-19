@@ -4,11 +4,13 @@ class MyElevatedButton extends StatelessWidget {
   final String title;
   final bool isLoading;
   final Color? bgColor;
+  final EdgeInsets? padding;
   final Function()? onTap;
 
   const MyElevatedButton(
       {super.key,
       this.bgColor,
+      this.padding,
       this.isLoading = false,
       required this.title,
       required this.onTap});
@@ -18,12 +20,12 @@ class MyElevatedButton extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: 55,
+            height: 45,
             width: double.infinity,
+            padding: padding,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                color:
-                    onTap == null ? Colors.grey.shade300 : bgColor),
+                color: onTap == null ? Colors.grey.shade300 : bgColor),
             child: Center(
                 child: isLoading
                     ? const CircularProgressIndicator(color: Colors.white)

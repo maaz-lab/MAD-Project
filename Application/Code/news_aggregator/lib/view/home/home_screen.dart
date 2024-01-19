@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:news_aggregator/resources/data/my_data.dart';
-import 'package:news_aggregator/widgets/home_news_card/home_news_card.dart';
 import '../../resources/constants/style.dart';
+import '../../resources/data/my_data.dart';
+import '../../widgets/home_news_card/home_news_card.dart';
+import '../news_detail/news_detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,6 +37,15 @@ class HomeScreen extends StatelessWidget {
                           thumbnail: MyData.newsList[index].thumbnailImage,
                           title: MyData.newsList[index].title,
                           description: MyData.newsList[index].description,
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NewsDetailScreen(
+                                      image: MyData
+                                          .newsList[index].thumbnailImage!,
+                                      title: MyData.newsList[index].title!,
+                                      description: MyData
+                                          .newsList[index].description!))),
                         )),
               ),
             )
