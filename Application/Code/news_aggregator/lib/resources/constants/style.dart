@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Style {
+  // Color
+  static const Color drawerColor = Color(0xffE9E2E2);
+
   // Padding
   static double padding = 16;
 

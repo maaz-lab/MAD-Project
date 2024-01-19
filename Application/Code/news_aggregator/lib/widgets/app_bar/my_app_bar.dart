@@ -42,7 +42,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: onTapAction != null
             ? [
                 IconButton(
-                    onPressed: onTapDrawer,
+                    onPressed: onTapAction,
                     icon: const Icon(
                       Icons.search,
                       size: 30,

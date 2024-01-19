@@ -31,7 +31,8 @@ class HomeNewsCard extends StatelessWidget {
                 child: Image.asset(
                   thumbnail ?? MyImages.noImage,
                   height: 200,
-                  fit: BoxFit.contain,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 )),
             Padding(
               padding: EdgeInsets.all(Style.padding),

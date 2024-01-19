@@ -18,13 +18,18 @@ class MainScreenState extends State<MainScreen> {
 
   final PageController pageController = PageController();
 
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MyDrawer(),
+      key: scaffoldKey,
+      drawer: MyDrawer(
+        scaffoldKey: scaffoldKey,
+      ),
       appBar: MyAppBar(
         title: "News Time",
-        onTapDrawer: () {},
+        onTapDrawer: () => scaffoldKey.currentState?.openDrawer(),
         onTapAction: () {},
         bottom: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
