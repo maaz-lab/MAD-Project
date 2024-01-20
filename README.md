@@ -39,3 +39,6 @@ A user can mark the specific as its favourite news of the day by subscribing the
 ![navigation](https://github.com/maaz-lab/MAD-Project/assets/152865626/4ceee097-0cb5-4a2d-a5ec-437ec82ff2cb)
 #### Navigation Screen:
 This screen shows that user can go to the navigation screen by clicking the icon over there in which he can see his profile as well as switch the app to the dark mode theme and also can to new channels offical website for live news updates.
+
+### All Screens
+![All screens](https://github.com/maaz-lab/MAD-Project/assets/152865626/3dcc0b0e-ce42-4b2b-a465-538ce060631e)
