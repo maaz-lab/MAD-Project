@@ -20,18 +20,22 @@ This is the screen for the first channel named Ary news  showing the latest news
 #### SAMAA Screen:
 This is the screen for the first channel named SAMAA  news  showing the latest news of this specific channel, its also allows the user to search a specific news.
 ### Screen 6:
+![Search Screen](https://github.com/maaz-lab/MAD-Project/assets/152865626/65f85637-a5d1-4128-b741-b5827b45d923)
+#### Search Screen:
+The Search screen allows user to search a specific news by clicking the search icon so the user can search specific news he wants.
+### Screen 7:
 ![Signup screen](https://github.com/maaz-lab/MAD-Project/assets/152865626/02b40c17-e7f0-40cd-bf34-96ce8251fe9f)
 #### Signup Screen:
 The signup screen helps the user to sign up on the application by entering the details including name, email, password to signup on the screen.
-### Screen 7:
+### Screen 8:
 ![login screen](https://github.com/maaz-lab/MAD-Project/assets/152865626/9677e257-611f-47eb-9b75-627c33614d04)
 #### Login Screen:
 This screen shows that the user can log in his/her account by entering the registered email , password so he can access his/her account.
-### Screen 8:
+### Screen 9:
 ![favourite news](https://github.com/maaz-lab/MAD-Project/assets/152865626/c511d57c-47ee-466b-9a03-8aa70e344449)
 #### Favourite Screen:
 A user can mark the specific as its favourite news of the day by subscribing the channel and like the news by having an heart icon on this screen that can idenfies the favourite news of the user.
-### Screen 9:
+### Screen 10:
 ![navigation](https://github.com/maaz-lab/MAD-Project/assets/152865626/4ceee097-0cb5-4a2d-a5ec-437ec82ff2cb)
 #### Navigation Screen:
 This screen shows that user can go to the navigation screen by clicking the icon over there in which he can see his profile as well as switch the app to the dark mode theme and also can to new channels offical website for live news updates.
