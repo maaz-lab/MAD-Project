@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../resources/constants/style.dart';
+import '../../theme/theme_provider.dart';
 
 class MyTabButton extends StatelessWidget {
   final String title;
@@ -15,12 +17,22 @@ class MyTabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
+          border: Border.all(color: Style.darkColor),
           borderRadius: BorderRadius.circular(20),
-          color: selectedIndex == index ? Colors.black : Colors.white),
+          color: selectedIndex == index
+              ? isDark
+                  ? Style.lightColor
+                  : Style.darkColor
+              : isDark
+                  ? Style.darkColor
+                  : null),
       child: InkWell(
         onTap: () {
           if (selectedIndex != index) {
@@ -35,7 +47,13 @@ class MyTabButton extends StatelessWidget {
             title,
             style: Style.title.copyWith(
                 fontWeight: FontWeight.normal,
-                color: selectedIndex == index ? Colors.white : Colors.black),
+                color: selectedIndex == index
+                    ? isDark
+                        ? Style.darkColor
+                        : Colors.white
+                    : isDark
+                        ? Style.lightColor
+                        : Style.darkColor),
           ),
         ),
       ),

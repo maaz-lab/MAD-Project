@@ -31,10 +31,11 @@ class NewsScreen extends StatelessWidget {
                     Image.asset(logo),
                     Style.space10,
                     SizedBox(
-                        width: 150,
+                        height: 30,
+                        width: 100,
                         child: MyElevatedButton(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 0),
+                                horizontal: 0, vertical: 2),
                             bgColor: Colors.red,
                             title: "Subscribe",
                             onTap: () {}))

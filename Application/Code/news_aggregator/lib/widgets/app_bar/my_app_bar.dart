@@ -39,7 +39,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 icon: const Icon(
                   Icons.menu,
                   size: 30,
-                  color: Colors.black,
                 ))
             : null,
         actions: onTapAction != null
@@ -49,7 +48,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     icon: const Icon(
                       Icons.search,
                       size: 30,
-                      color: Colors.black,
                     )),
               ]
             : null,

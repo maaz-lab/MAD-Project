@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:news_aggregator/resources/constants/style.dart';
-import 'package:news_aggregator/widgets/drawer_card/drawer_card.dart';
+import 'package:provider/provider.dart';
+import '../../resources/constants/logos.dart';
+import '../../resources/constants/style.dart';
+import '../../theme/theme_provider.dart';
+import '../drawer_card/drawer_card.dart';
 
 class MyDrawer extends StatelessWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
@@ -9,9 +12,13 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    bool isDark = themeProvider.currentTheme == ThemeData.dark();
+
     return Container(
       width: 300,
-      color: Style.drawerColor,
+      color: isDark ? Style.darkColor : Style.drawerColor,
       child: SafeArea(
         child: Column(
           children: [
@@ -24,20 +31,38 @@ class MyDrawer extends StatelessWidget {
               ],
             ),
             Style.space10,
+            Consumer<ThemeProvider>(
+              builder: (context, value, child) {
+                final isDark = value.currentTheme == ThemeData.dark();
+
+                return DrawerCard(
+                  icon: isDark ? Icons.light_mode : Icons.dark_mode,
+                  iconColor: isDark ? Colors.amber : Style.darkColor,
+                  title: isDark ? "Light Mode" : "Dark Mode",
+                  isToggle: true,
+                  onTap: () => value.toggleTheme(),
+                );
+              },
+            ),
+            Container(
+                height: 1,
+                margin: const EdgeInsets.symmetric(vertical: 5),
+                child: const Drawer(
+                  backgroundColor: Colors.grey,
+                )),
             DrawerCard(
-              icon: Icons.account_circle,
-              title: "DANIYAL NAWAZ",
-              subTitle: "View profile",
+              image: MyLogos.geoNewsLogo,
+              title: "Geo Live",
               onTap: () {},
             ),
             DrawerCard(
-              icon: Icons.dark_mode,
-              title: "Dark Mode",
+              image: MyLogos.aryNewsLogo,
+              title: "Ary Live",
               onTap: () {},
             ),
             DrawerCard(
-              icon: Icons.settings,
-              title: "Settings",
+              image: MyLogos.samaaNewsLogo,
+              title: "Samaa Live",
               onTap: () {},
             ),
           ],

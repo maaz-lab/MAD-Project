@@ -18,11 +18,12 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Trends",
+                  "Favourite",
                   style: Style.heading,
                 ),
                 const Icon(
-                  Icons.account_circle_rounded,
+                  Icons.favorite,
+                  color: Colors.red,
                   size: 30,
                 )
               ],

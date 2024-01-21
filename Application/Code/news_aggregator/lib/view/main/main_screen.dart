@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_aggregator/view/search/search_screen.dart';
 import '../../resources/constants/logos.dart';
 import '../../resources/data/my_data.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
@@ -33,7 +34,8 @@ class MainScreenState extends State<MainScreen> {
           height: kToolbarHeight + 40,
           title: "News Time",
           onTapDrawer: () => scaffoldKey.currentState?.openDrawer(),
-          onTapAction: () {},
+          onTapAction: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SearchScreen())),
           bottom: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -67,6 +69,11 @@ class MainScreenState extends State<MainScreen> {
         ),
         body: PageView(
           controller: pageController,
+          onPageChanged: (value) {
+            setState(() {
+              currentIndex = value;
+            });
+          },
           children: [
             const HomeScreen(),
             NewsScreen(

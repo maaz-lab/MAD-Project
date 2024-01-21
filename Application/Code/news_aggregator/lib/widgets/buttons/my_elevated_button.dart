@@ -20,7 +20,6 @@ class MyElevatedButton extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Container(
-            height: 45,
             width: double.infinity,
             padding: padding,
             decoration: BoxDecoration(
@@ -32,7 +31,7 @@ class MyElevatedButton extends StatelessWidget {
                     : Text(title,
                         style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold)))));
   }
 }
