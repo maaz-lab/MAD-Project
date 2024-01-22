@@ -81,8 +81,8 @@ Toggle between light and dark mode for user preference.
 | S.No     | News Channel |
 | ---      | ---          |
 | 1        | Geo News     |
-| 2        | Ary News     |
-| 3        | Samaa News   |
+| 2        | BOL News     |
+| 3        | Express News |
 
 ### 2.2 Similar Apps:
 | S.No     | App             |
