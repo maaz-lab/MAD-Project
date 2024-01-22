@@ -170,8 +170,6 @@ Compatible for both android and IOs.
 ### 4.2 Backend Technologies: 
 4.2.1 NodeJs 
 
-4.2.2 Php
-
 ### 4.3 Database: 
 4.3.1 NoSql (MongoDb)
 
