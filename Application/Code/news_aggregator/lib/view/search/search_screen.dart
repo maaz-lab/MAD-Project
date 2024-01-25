@@ -26,27 +26,27 @@ class SearchScreen extends StatelessWidget {
           padding: EdgeInsets.all(Style.padding),
           child: Column(
             children: [
-              Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: List.generate(
-                      MyData.newsList.length,
-                      (index) => HomeNewsCard(
-                            thumbnail: MyData.newsList[index].thumbnailImage,
-                            title: MyData.newsList[index].title,
-                            description: MyData.newsList[index].description,
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => NewsDetailScreen(
-                                        image: MyData
-                                            .newsList[index].thumbnailImage!,
-                                        title: MyData.newsList[index].title!,
-                                        description: MyData
-                                            .newsList[index].description!))),
-                          )),
-                ),
-              )
+              // Expanded(
+              //   child: ListView(
+              //     shrinkWrap: true,
+              //     children: List.generate(
+              //         MyData.newsList.length,
+              //         (index) => HomeNewsCard(
+              //               thumbnail: MyData.newsList[index].thumbnailImage,
+              //               title: MyData.newsList[index].title,
+              //               description: MyData.newsList[index].description,
+              //               onTap: () => Navigator.push(
+              //                   context,
+              //                   MaterialPageRoute(
+              //                       builder: (context) => NewsDetailScreen(
+              //                           image: MyData
+              //                               .newsList[index].thumbnailImage!,
+              //                           title: MyData.newsList[index].title!,
+              //                           description: MyData
+              //                               .newsList[index].description!))),
+              //             )),
+              //   ),
+              // )
             ],
           ),
         ),

@@ -44,28 +44,28 @@ class NewsScreen extends StatelessWidget {
               ],
             ),
             Style.space10,
-            Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                children: List.generate(
-                    MyData.newsList.length,
-                    (index) => NewsCard(
-                          thumbnail: MyData.newsList[index].thumbnailImage,
-                          title: MyData.newsList[index].title,
-                          description: MyData.newsList[index].description,
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => NewsDetailScreen(
-                                      newsLogo: logo,
-                                      image: MyData
-                                          .newsList[index].thumbnailImage!,
-                                      title: MyData.newsList[index].title!,
-                                      description: MyData
-                                          .newsList[index].description!))),
-                        )),
-              ),
-            )
+            // Expanded(
+            //   child: ListView(
+            //     shrinkWrap: true,
+            //     children: List.generate(
+            //         MyData.newsList.length,
+            //         (index) => NewsCard(
+            //               thumbnail: MyData.newsList[index].thumbnailImage,
+            //               title: MyData.newsList[index].title,
+            //               description: MyData.newsList[index].description,
+            //               onTap: () => Navigator.push(
+            //                   context,
+            //                   MaterialPageRoute(
+            //                       builder: (context) => NewsDetailScreen(
+            //                           newsLogo: logo,
+            //                           image: MyData
+            //                               .newsList[index].thumbnailImage!,
+            //                           title: MyData.newsList[index].title!,
+            //                           description: MyData
+            //                               .newsList[index].description!))),
+            //             )),
+            //   ),
+            // )
           ],
         ),
       ),

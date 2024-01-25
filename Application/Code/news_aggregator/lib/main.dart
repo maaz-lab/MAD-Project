@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'routes/routes_name.dart';
 import 'routes/routes.dart';
 import 'theme/theme_provider.dart';
+import 'view_models/news/news_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => ThemeProvider()),
+          ChangeNotifierProvider(create: (context) => NewsViewModel()),
         ],
         child: ChangeNotifierProvider(
             create: (context) => ThemeProvider(isDark: isDark),

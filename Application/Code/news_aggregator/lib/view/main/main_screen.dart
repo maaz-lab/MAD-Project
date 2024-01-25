@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_aggregator/view/search/search_screen.dart';
 import '../../resources/constants/logos.dart';
 import '../../resources/data/my_data.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
@@ -7,6 +6,7 @@ import '../../widgets/buttons/my_tab_button.dart';
 import '../../widgets/drawer/my_drawer.dart';
 import '../home/home_screen.dart';
 import '../news/news_screen.dart';
+import '../search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -77,15 +77,15 @@ class MainScreenState extends State<MainScreen> {
           children: [
             const HomeScreen(),
             NewsScreen(
-              title: "Geo News",
+              title: "Express News",
               logo: MyLogos.geoNewsLogo,
             ),
             NewsScreen(
-              title: "Ary News",
+              title: "Geo News",
               logo: MyLogos.aryNewsLogo,
             ),
             NewsScreen(
-              title: "Samaa News",
+              title: "Bol News",
               logo: MyLogos.samaaNewsLogo,
             ),
           ],

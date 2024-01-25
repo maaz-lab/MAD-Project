@@ -28,7 +28,7 @@ class HomeNewsCard extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                child: Image.asset(
+                child: Image.network(
                   thumbnail ?? MyImages.noImage,
                   height: 200,
                   width: double.infinity,
