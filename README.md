@@ -100,12 +100,8 @@ Toggle between light and dark mode for user preference.
 The News Aggregator app is purposefully crafted for the Android platform, strictly adhering to Android design principles. It offers a responsive and user-friendly interface designed to seamlessly adapt to various screen sizes and resolutions found across a wide range of Android devices. This commitment ensures a uniform and optimized user experience for users on different Android-powered mobile devices.
 
 ### 2.4 Product Feature:
- This Major of feature News Aggregator app data system as shown in below hierarchical NoSql database  Diagram: 
+ This Major of feature News Aggregator app data system as shown in below hierarchical NoSql database: 
  
-![image](https://github.com/maaz-lab/MAD-Project/assets/152025166/28ce2d02-71e3-4d69-b0b7-c2b69025aad5)
-
-                                          Figure 1
-
 
 ### 2.4.1 News Channel:
 This feature empowers users to select their favorite news channels. Whether you prefer global news, local updates, or something specific, this feature allows      you to choose the channels.
