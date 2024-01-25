@@ -47,7 +47,7 @@ async function connectToDB() {
     //console.log('Bol News:', bolNews);
 
     // Expose API endpoints
-    app.get('/expressNews', (req, res) => {
+    app.get('/express-news', (req, res) => {
       // Extract specific attributes
       const expressSimplifiedNews = expressNews.map(
         ({ title, time, featured_img, description, category }) => ({
@@ -61,7 +61,7 @@ async function connectToDB() {
       res.json(expressSimplifiedNews);
     });
 
-    app.get('/geoNews', (req, res) => {
+    app.get('/geo-news', (req, res) => {
       
       const geoSimplifiedNews = geoNews.map(
         ({ title, time, featured_img, description, category }) => ({
@@ -75,7 +75,7 @@ async function connectToDB() {
       res.json(geoSimplifiedNews);
     });
 
-    app.get('/bolNews', (req, res) => {
+    app.get('/bol-news', (req, res) => {
       
       const bolSimplifiedNews = bolNews.map(
         ({ title, time, featured_img, description, category }) => ({
