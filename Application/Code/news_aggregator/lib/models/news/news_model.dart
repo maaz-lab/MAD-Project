@@ -1,52 +1,33 @@
 class NewsModel {
-  final String? title,
-      description,
-      thumbnailImage,
-      newsLink,
-      channelLink,
-      channelLogo,
-      videoUrl,
-      category;
-  final List<String>? images;
+  String? title;
+  String? time;
+  String? featuredImg;
+  String? description;
+  String? category;
 
-  NewsModel({
-    this.title,
-    this.description,
-    this.thumbnailImage,
-    this.newsLink,
-    this.channelLink,
-    this.channelLogo,
-    this.videoUrl,
-    this.category,
-    this.images,
-  });
+  NewsModel(
+      {this.title,
+      this.time,
+      this.featuredImg,
+      this.description,
+      this.category});
 
-  Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'description': description,
-      'thumbnailImage': thumbnailImage,
-      'newsLink': newsLink,
-      'channelLink': channelLink,
-      'channelLogo': channelLogo,
-      'videoUrl': videoUrl,
-      'category': category,
-      'images': images,
-    };
+  NewsModel.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    time = json['time'];
+    featuredImg = json['featured_img'];
+    description = json['description'];
+    category = json['category'];
   }
 
-  factory NewsModel.fromJson(Map<String, dynamic> json) {
-    return NewsModel(
-      title: json['title'],
-      description: json['description'],
-      thumbnailImage: json['thumbnailImage'],
-      newsLink: json['newsLink'],
-      channelLink: json['channelLink'],
-      channelLogo: json['channelLogo'],
-      videoUrl: json['videoUrl'],
-      category: json['category'],
-      images: List<String>.from(json['images']),
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
+    data['time'] = time;
+    data['featured_img'] = featuredImg;
+    data['description'] = description;
+    data['category'] = category;
+    return data;
   }
 
   static List<NewsModel> fromJsonList(List<dynamic> jsonList) {
