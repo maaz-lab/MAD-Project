@@ -39,7 +39,13 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
 
+  flutter_native_splash: ^2.3.9
+
   flutter_launcher_icons: ^0.13.1
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/logos/news_time_logo.png"
 
 flutter_icons:
   android: true
