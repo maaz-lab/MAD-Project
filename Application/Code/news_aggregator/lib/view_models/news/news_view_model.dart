@@ -10,6 +10,8 @@ import '../../view/news/news_screen.dart';
 class NewsViewModel with ChangeNotifier {
   final NewsRepository _newsRepo = NewsRepository();
 
+  final PageController pageController = PageController();
+
   int currentIndex = 0;
 
   updateIndex(int value) {
@@ -58,6 +60,51 @@ class NewsViewModel with ChangeNotifier {
     if (isBol) {
       isBolSubscribed = !isBolSubscribed;
     }
+
+    List<String> sortedTabs = ["Home"];
+    List<Widget> sortedScreens = [const HomeScreen()];
+
+    if (isExpressSubscribed) {
+      sortedTabs.add("Express News");
+      sortedScreens.add(NewsScreen(
+        isExpress: true,
+        title: "Express News",
+        logo: MyLogos.expressNewsLogo,
+      ));
+    }
+    if (isGeoSubscribed) {
+      sortedTabs.add("Geo News");
+      sortedScreens.add(NewsScreen(
+        isGeo: true,
+        title: "Geo News",
+        logo: MyLogos.geoNewsLogo,
+      ));
+    }
+    if (isBolSubscribed) {
+      sortedTabs.add("Bol News");
+      sortedScreens.add(NewsScreen(
+        isBol: true,
+        title: "Bol News",
+        logo: MyLogos.bolNewsLogo,
+      ));
+    }
+
+    for (int i = 1; i < newsTabs.length; i++) {
+      if (!sortedTabs.contains(newsTabs[i])) {
+        sortedTabs.add(newsTabs[i]);
+        sortedScreens.add(screens[i]);
+      }
+    }
+
+    // currentIndex = sortedTabs.indexOf("Home");
+    pageController.animateToPage(1,
+        duration: const Duration(milliseconds: 300), curve: Curves.linear);
+
+    newsTabs.clear();
+    newsTabs.addAll(sortedTabs);
+    screens.clear();
+    screens.addAll(sortedScreens);
+
     notifyListeners();
   }
 

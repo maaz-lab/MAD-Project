@@ -14,8 +14,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-  final PageController pageController = PageController();
-
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -31,7 +29,7 @@ class MainScreenState extends State<MainScreen> {
               title: "News Time",
               onTapDrawer: () => scaffoldKey.currentState?.openDrawer(),
               onTapAction: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SearchScreen())),
+                  MaterialPageRoute(builder: (context) => const SearchScreen())),
               bottom: Consumer<NewsViewModel>(
                 builder: (context, value, child) {
                   return SingleChildScrollView(
@@ -52,7 +50,7 @@ class MainScreenState extends State<MainScreen> {
                                         selectedIndex: value.currentIndex,
                                         onChanged: (newIndex) {
                                           value.updateIndex(newIndex!);
-                                          pageController.animateToPage(newIndex,
+                                          value.pageController.animateToPage(newIndex,
                                               duration: const Duration(
                                                   milliseconds: 300),
                                               curve: Curves.linear);
@@ -67,7 +65,7 @@ class MainScreenState extends State<MainScreen> {
           body: Consumer<NewsViewModel>(
             builder: (context, value, child) {
               return PageView(
-                controller: pageController,
+                controller: value.pageController,
                 onPageChanged: (index) => value.updateIndex(index),
                 children: value.screens,
               );
