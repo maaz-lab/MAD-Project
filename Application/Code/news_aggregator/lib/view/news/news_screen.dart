@@ -101,10 +101,10 @@ class _NewsScreenState extends State<NewsScreen> {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: widget.isExpress
-                                  ? value.expressNewsList.data!.length
+                                  ? value.expressNewsList.data?.length
                                   : widget.isGeo
-                                      ? value.geoNewsList.data!.length
-                                      : value.bolNewsList.data!.length,
+                                      ? value.geoNewsList.data?.length
+                                      : value.bolNewsList.data?.length,
                               itemBuilder: (context, index) {
                                 final news = widget.isExpress
                                     ? value.expressNewsList.data![index]

@@ -52,9 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               return ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemCount: value.allNewsList.data!.length,
+                                itemCount: value.allNewsList.data?.length,
                                 itemBuilder: (context, index) {
-                                  final news = value.allNewsList.data![index];
+                                  final news = value.allNewsList.data?[index];
 
                                   return HomeNewsCard(
                                     news: news,
