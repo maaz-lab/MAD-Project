@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import '../../models/news/news_model.dart';
 import '../../resources/constants/style.dart';
 import '../loading_image/loading_network_image.dart';
 
 class HomeNewsCard extends StatelessWidget {
-  final String? title, description, thumbnail;
+  final NewsModel? news;
   final Function()? onTap;
 
-  const HomeNewsCard(
-      {super.key, this.title, this.description, this.thumbnail, this.onTap});
+  const HomeNewsCard({super.key, this.news, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,7 @@ class HomeNewsCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (news?.featuredImg != null) ...[
             ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
@@ -31,25 +32,25 @@ class HomeNewsCard extends StatelessWidget {
                 child: SizedBox(
                   height: 200,
                   child: LoadingNetworkImage(
-                    image: thumbnail,
+                    image: news?.featuredImg,
                     height: 200,
                     width: double.infinity,
                     boxfit: BoxFit.cover,
                   ),
-                )),
+                )),],
             Padding(
               padding: EdgeInsets.all(Style.padding),
               child: Column(
                 children: [
                   Text(
-                    title ?? "",
+                    news?.title ?? "",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: Style.title.copyWith(fontWeight: FontWeight.w600),
                   ),
                   Style.space10,
                   Text(
-                    description ?? "",
+                    news?.description ?? "",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 3,
                     style: Style.body,

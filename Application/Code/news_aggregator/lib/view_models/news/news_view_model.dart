@@ -47,34 +47,6 @@ class NewsViewModel with ChangeNotifier {
   bool isGeoSubscribed = false;
   bool isBolSubscribed = false;
 
-  // void updateTabOrder() {
-  //   List<String> updatedTabs = ["Home"];
-
-  //   if (isExpressSubscribed) updatedTabs.add("Express News");
-  //   if (isGeoSubscribed) updatedTabs.add("Geo News");
-  //   if (isBolSubscribed) updatedTabs.add("Bol News");
-
-  //   newsTabs.clear();
-  //   newsTabs.addAll(updatedTabs);
-  // }
-
-  // void updateScreenOrder() {
-  //   List<Widget> updatedScreens = [screens[0]];
-
-  //   if (isExpressSubscribed) {
-  //     updatedScreens.add(screens[1]);
-  //   }
-  //   if (isGeoSubscribed) {
-  //     updatedScreens.add(screens[2]);
-  //   }
-  //   if (isBolSubscribed) {
-  //     updatedScreens.add(screens[3]);
-  //   }
-
-  //   screens.clear();
-  //   screens.addAll(updatedScreens);
-  // }
-
   setSubscribe(
       {bool isExpress = false, bool isGeo = false, bool isBol = false}) {
     if (isExpress) {
@@ -86,8 +58,6 @@ class NewsViewModel with ChangeNotifier {
     if (isBol) {
       isBolSubscribed = !isBolSubscribed;
     }
-    // updateTabOrder();
-    // updateScreenOrder();
     notifyListeners();
   }
 
@@ -104,6 +74,34 @@ class NewsViewModel with ChangeNotifier {
     }
     notifyListeners();
     return "Subscribe";
+  }
+
+  List<NewsModel> searchNews(String query) {
+    List<NewsModel> searchResult = [];
+
+    for (NewsModel news in allNewsList.data ?? []) {
+      if (news.title?.toLowerCase().contains(query.toLowerCase()) ?? false) {
+        searchResult.add(news);
+      }
+    }
+    return searchResult;
+  }
+
+  ApiResponse<List<NewsModel>> allNewsList = ApiResponse.loading();
+
+  setAllNewsList(ApiResponse<List<NewsModel>> data) {
+    allNewsList = data;
+    notifyListeners();
+  }
+
+  Future<void> getAllNews() async {
+    setAllNewsList(ApiResponse.loading());
+
+    _newsRepo.getAllNews(AppUrl.expressEndPoint).then((value) {
+      setAllNewsList(ApiResponse.completed(value));
+    }).onError((error, stackTrace) {
+      setAllNewsList(ApiResponse.error(error.toString()));
+    });
   }
 
   ApiResponse<List<NewsModel>> expressNewsList = ApiResponse.loading();

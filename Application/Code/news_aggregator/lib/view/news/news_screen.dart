@@ -40,7 +40,7 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(Style.padding),
+        padding: EdgeInsets.all(Style.padding).copyWith(bottom: 0),
         child: Column(children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,

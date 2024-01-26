@@ -19,9 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    newsViewModel.getExpressNews();
-    newsViewModel.getGeoNews();
-    newsViewModel.getBolNews();
+    newsViewModel.getAllNews();
     super.initState();
   }
 
@@ -29,22 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(Style.padding),
+        padding: EdgeInsets.all(Style.padding).copyWith(bottom: 0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Favourite",
-                  style: Style.heading,
-                ),
-                const Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                  size: 30,
-                )
-              ],
+            Text(
+              "Latest News",
+              style: Style.heading,
             ),
             Style.space10,
             Expanded(
@@ -54,24 +43,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (context, snapshot) {
                       return Consumer<NewsViewModel>(
                         builder: (context, value, child) {
-                          switch (value.expressNewsList.status) {
+                          switch (value.allNewsList.status) {
                             case Status.ERROR:
-                              debugPrint(value.expressNewsList.message);
+                              debugPrint(value.allNewsList.message);
                               return Container();
 
                             case Status.COMPLETED:
                               return ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemCount: value.expressNewsList.data!.length,
+                                itemCount: value.allNewsList.data!.length,
                                 itemBuilder: (context, index) {
-                                  final news =
-                                      value.expressNewsList.data![index];
+                                  final news = value.allNewsList.data![index];
 
                                   return HomeNewsCard(
-                                    title: news.title,
-                                    description: news.description,
-                                    thumbnail: news.featuredImg,
+                                    news: news,
                                     onTap: () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
