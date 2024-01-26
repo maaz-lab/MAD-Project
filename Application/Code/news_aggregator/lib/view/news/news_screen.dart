@@ -1,14 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../data/responses/status.dart';
 import '../../resources/constants/style.dart';
-import '../../resources/data/my_data.dart';
+import '../../view_models/news/news_view_model.dart';
 import '../../widgets/buttons/my_elevated_button.dart';
+import '../../widgets/loading_indicator/my_loading_indicator.dart';
 import '../../widgets/news_card/news_card.dart';
 import '../news_detail/news_detail_screen.dart';
 
-class NewsScreen extends StatelessWidget {
+class NewsScreen extends StatefulWidget {
   final String title, logo;
+  final bool isExpress, isGeo, isBol;
 
-  const NewsScreen({super.key, required this.title, required this.logo});
+  const NewsScreen({
+    super.key,
+    this.isExpress = false,
+    this.isGeo = false,
+    this.isBol = false,
+    required this.title,
+    required this.logo,
+  });
+
+  @override
+  State<NewsScreen> createState() => _NewsScreenState();
+}
+
+class _NewsScreenState extends State<NewsScreen> {
+  NewsViewModel newsViewModel = NewsViewModel();
+
+  @override
+  void initState() {
+    // if (widget.isExpress) {
+    newsViewModel.getExpressNews();
+    // }
+    // if (widget.isGeo) {
+    newsViewModel.getGeoNews();
+    // }
+    // if (widget.isBol) {
+    newsViewModel.getBolNews();
+    // }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +60,8 @@ class NewsScreen extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Image.asset(logo),
+                    SizedBox(
+                        height: 40, width: 80, child: Image.asset(widget.logo)),
                     Style.space10,
                     SizedBox(
                         height: 30,
@@ -44,28 +77,56 @@ class NewsScreen extends StatelessWidget {
               ],
             ),
             Style.space10,
-            // Expanded(
-            //   child: ListView(
-            //     shrinkWrap: true,
-            //     children: List.generate(
-            //         MyData.newsList.length,
-            //         (index) => NewsCard(
-            //               thumbnail: MyData.newsList[index].thumbnailImage,
-            //               title: MyData.newsList[index].title,
-            //               description: MyData.newsList[index].description,
-            //               onTap: () => Navigator.push(
-            //                   context,
-            //                   MaterialPageRoute(
-            //                       builder: (context) => NewsDetailScreen(
-            //                           newsLogo: logo,
-            //                           image: MyData
-            //                               .newsList[index].thumbnailImage!,
-            //                           title: MyData.newsList[index].title!,
-            //                           description: MyData
-            //                               .newsList[index].description!))),
-            //             )),
-            //   ),
-            // )
+            Expanded(
+              child: SingleChildScrollView(
+                child: ChangeNotifierProvider<NewsViewModel>(
+                    create: (context) => newsViewModel,
+                    builder: (context, snapshot) {
+                      return Consumer<NewsViewModel>(
+                        builder: (context, value, child) {
+                          switch (value.expressNewsList.status) {
+                            case Status.ERROR:
+                              debugPrint(value.expressNewsList.message);
+                              return Container();
+
+                            case Status.COMPLETED:
+                              return ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: widget.isExpress
+                                    ? value.expressNewsList.data!.length
+                                    : widget.isGeo
+                                        ? value.geoNewsList.data!.length
+                                        : value.bolNewsList.data!.length,
+                                itemBuilder: (context, index) {
+                                  final news = widget.isExpress
+                                      ? value.expressNewsList.data![index]
+                                      : widget.isGeo
+                                          ? value.geoNewsList.data![index]
+                                          : value.bolNewsList.data![index];
+
+                                  return NewsCard(
+                                    news: news,
+                                    onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                NewsDetailScreen(
+                                                  news: news,
+                                                  newsLogo: widget.logo,
+                                                ))),
+                                  );
+                                },
+                              );
+
+                            default:
+                              return const MyLoadingIndicator();
+                          }
+                        },
+                      );
+                    }),
+              ),
+            ),
           ],
         ),
       ),
