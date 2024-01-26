@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../resources/constants/logos.dart';
-import '../../resources/data/my_data.dart';
+import 'package:provider/provider.dart';
+import '../../view_models/news/news_view_model.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
 import '../../widgets/buttons/my_tab_button.dart';
 import '../../widgets/drawer/my_drawer.dart';
-import '../home/home_screen.dart';
-import '../news/news_screen.dart';
 import '../search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,8 +14,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-  int currentIndex = 0;
-
   final PageController pageController = PageController();
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -26,74 +22,57 @@ class MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        key: scaffoldKey,
-        drawer: MyDrawer(
-          scaffoldKey: scaffoldKey,
-        ),
-        appBar: MyAppBar(
-          height: kToolbarHeight + 40,
-          title: "News Time",
-          onTapDrawer: () => scaffoldKey.currentState?.openDrawer(),
-          onTapAction: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SearchScreen())),
-          bottom: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ...List.generate(
-                    MyData.tabs.length,
-                    (index) => Row(
-                          children: [
-                            if (index == 0)
-                              const SizedBox(
-                                width: 10,
-                              ),
-                            MyTabButton(
-                                title: MyData.tabs[index],
-                                index: index,
-                                selectedIndex: currentIndex,
-                                onChanged: (value) {
-                                  setState(() {
-                                    currentIndex = index;
-                                    pageController.animateToPage(value!,
-                                        duration:
-                                            const Duration(milliseconds: 300),
-                                        curve: Curves.linear);
-                                  });
-                                }),
-                          ],
-                        ))
-              ],
-            ),
+          key: scaffoldKey,
+          drawer: MyDrawer(
+            scaffoldKey: scaffoldKey,
           ),
-        ),
-        body: PageView(
-          controller: pageController,
-          onPageChanged: (value) {
-            setState(() {
-              currentIndex = value;
-            });
-          },
-          children: [
-            const HomeScreen(),
-            NewsScreen(
-              isExpress: true,
-              title: "Express News",
-              logo: MyLogos.expressNewsLogo,
-            ),
-            NewsScreen(
-              isGeo: true,
-              title: "Geo News",
-              logo: MyLogos.geoNewsLogo,
-            ),
-            NewsScreen(
-              isBol: true,
-              title: "Bol News",
-              logo: MyLogos.bolNewsLogo,
-            ),
-          ],
-        ),
-      ),
+          appBar: MyAppBar(
+              height: kToolbarHeight + 40,
+              title: "News Time",
+              onTapDrawer: () => scaffoldKey.currentState?.openDrawer(),
+              onTapAction: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchScreen())),
+              bottom: Consumer<NewsViewModel>(
+                builder: (context, value, child) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        ...List.generate(
+                            value.newsTabs.length,
+                            (index) => Row(
+                                  children: [
+                                    if (index == 0)
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                    MyTabButton(
+                                        title: value.newsTabs[index],
+                                        index: index,
+                                        selectedIndex: value.currentIndex,
+                                        onChanged: (newIndex) {
+                                          value.updateIndex(newIndex!);
+                                          pageController.animateToPage(newIndex,
+                                              duration: const Duration(
+                                                  milliseconds: 300),
+                                              curve: Curves.linear);
+                                        }),
+                                  ],
+                                ))
+                      ],
+                    ),
+                  );
+                },
+              )),
+          body: Consumer<NewsViewModel>(
+            builder: (context, value, child) {
+              return PageView(
+                controller: pageController,
+                onPageChanged: (index) => value.updateIndex(index),
+                children: value.screens,
+              );
+            },
+          )),
     );
   }
 }

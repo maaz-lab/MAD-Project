@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../resources/constants/logos.dart';
 import '../../resources/constants/style.dart';
+import '../../resources/url/app_url.dart';
 import '../../theme/theme_provider.dart';
+import '../../view/web_view/web_view_screen.dart';
 import '../drawer_card/drawer_card.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -53,17 +55,35 @@ class MyDrawer extends StatelessWidget {
             DrawerCard(
               image: MyLogos.expressNewsLogo,
               title: "Express Live",
-              onTap: () {},
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WebViewScreen(
+                            url: AppUrl.expressLiveEndPoint,
+                            newsLogo: MyLogos.expressNewsLogo,
+                          ))),
             ),
             DrawerCard(
               image: MyLogos.geoNewsLogo,
               title: "Geo Live",
-              onTap: () {},
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WebViewScreen(
+                            url: AppUrl.geoLiveEndPoint,
+                            newsLogo: MyLogos.geoNewsLogo,
+                          ))),
             ),
             DrawerCard(
               image: MyLogos.bolNewsLogo,
               title: "Bol Live",
-              onTap: () {},
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => WebViewScreen(
+                            url: AppUrl.bolLiveEndPoint,
+                            newsLogo: MyLogos.bolNewsLogo,
+                          ))),
             ),
           ],
         ),

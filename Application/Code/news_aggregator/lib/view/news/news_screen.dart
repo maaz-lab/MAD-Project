@@ -30,15 +30,9 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   void initState() {
-    // if (widget.isExpress) {
     newsViewModel.getExpressNews();
-    // }
-    // if (widget.isGeo) {
     newsViewModel.getGeoNews();
-    // }
-    // if (widget.isBol) {
     newsViewModel.getBolNews();
-    // }
     super.initState();
   }
 
@@ -47,88 +41,100 @@ class _NewsScreenState extends State<NewsScreen> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(Style.padding),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Latest News",
-                  style: Style.heading
-                      .copyWith(fontSize: 30, fontWeight: FontWeight.w600),
-                ),
-                Column(
-                  children: [
-                    SizedBox(
-                        height: 40, width: 80, child: Image.asset(widget.logo)),
-                    Style.space10,
-                    SizedBox(
-                        height: 30,
-                        width: 100,
-                        child: MyElevatedButton(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 2),
-                            bgColor: Colors.red,
-                            title: "Subscribe",
-                            onTap: () {}))
-                  ],
-                )
-              ],
-            ),
-            Style.space10,
-            Expanded(
-              child: SingleChildScrollView(
-                child: ChangeNotifierProvider<NewsViewModel>(
-                    create: (context) => newsViewModel,
-                    builder: (context, snapshot) {
-                      return Consumer<NewsViewModel>(
-                        builder: (context, value, child) {
-                          switch (value.expressNewsList.status) {
-                            case Status.ERROR:
-                              debugPrint(value.expressNewsList.message);
-                              return Container();
-
-                            case Status.COMPLETED:
-                              return ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: widget.isExpress
-                                    ? value.expressNewsList.data!.length
-                                    : widget.isGeo
-                                        ? value.geoNewsList.data!.length
-                                        : value.bolNewsList.data!.length,
-                                itemBuilder: (context, index) {
-                                  final news = widget.isExpress
-                                      ? value.expressNewsList.data![index]
-                                      : widget.isGeo
-                                          ? value.geoNewsList.data![index]
-                                          : value.bolNewsList.data![index];
-
-                                  return NewsCard(
-                                    news: news,
-                                    onTap: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                NewsDetailScreen(
-                                                  news: news,
-                                                  newsLogo: widget.logo,
-                                                ))),
-                                  );
-                                },
-                              );
-
-                            default:
-                              return const MyLoadingIndicator();
-                          }
-                        },
-                      );
-                    }),
+        child: Column(children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Latest News",
+                style: Style.heading
+                    .copyWith(fontSize: 30, fontWeight: FontWeight.w600),
               ),
+              Column(
+                children: [
+                  SizedBox(
+                      height: 40, width: 80, child: Image.asset(widget.logo)),
+                  Style.space10,
+                  Consumer<NewsViewModel>(
+                    builder: (context, value, child) {
+                      return SizedBox(
+                          height: 30,
+                          width: 100,
+                          child: MyElevatedButton(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 0, vertical: 2),
+                              bgColor: Colors.red,
+                              title: value.getSubscribeText(
+                                isExpress: widget.isExpress,
+                                isGeo: widget.isGeo,
+                                isBol: widget.isBol,
+                              ),
+                              onTap: () {
+                                value.setSubscribe(
+                                  isExpress: widget.isExpress,
+                                  isGeo: widget.isGeo,
+                                  isBol: widget.isBol,
+                                );
+                              }));
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
+          Style.space10,
+          Expanded(
+            child: SingleChildScrollView(
+              child: ChangeNotifierProvider<NewsViewModel>(
+                  create: (context) => newsViewModel,
+                  builder: (context, snapshot) {
+                    return Consumer<NewsViewModel>(
+                      builder: (context, value, child) {
+                        switch (value.expressNewsList.status) {
+                          case Status.ERROR:
+                            debugPrint(value.expressNewsList.message);
+                            return Container();
+
+                          case Status.COMPLETED:
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: widget.isExpress
+                                  ? value.expressNewsList.data!.length
+                                  : widget.isGeo
+                                      ? value.geoNewsList.data!.length
+                                      : value.bolNewsList.data!.length,
+                              itemBuilder: (context, index) {
+                                final news = widget.isExpress
+                                    ? value.expressNewsList.data![index]
+                                    : widget.isGeo
+                                        ? value.geoNewsList.data![index]
+                                        : value.bolNewsList.data![index];
+
+                                return NewsCard(
+                                  news: news,
+                                  onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              NewsDetailScreen(
+                                                news: news,
+                                                newsLogo: widget.logo,
+                                              ))),
+                                );
+                              },
+                            );
+
+                          default:
+                            return const MyLoadingIndicator();
+                        }
+                      },
+                    );
+                  }),
             ),
-          ],
-        ),
+          ),
+        ]),
       ),
     );
   }
