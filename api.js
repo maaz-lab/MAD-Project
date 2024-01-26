@@ -35,15 +35,15 @@ async function connectToDB() {
     const bolCol = db.collection(bolColName);
 
     
-    const expressNews = await expressCol.find({}).toArray();
+    const expressNews = await expressCol.find({}).sort({ time: -1 }).toArray();
     console.log('Express News:', expressNews);
 
     
-    const geoNews = await geoCol.find({}).toArray();
+    const geoNews = await geoCol.find({}).sort({ time: -1 }).toArray();
     //console.log('Geo News:', geoNews);
 
     
-    const bolNews = await bolCol.find({}).toArray();
+    const bolNews = await bolCol.find({}).sort({ time: -1 }).toArray();
     //console.log('Bol News:', bolNews);
 
     // Expose API endpoints
