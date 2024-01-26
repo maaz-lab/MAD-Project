@@ -8,11 +8,19 @@ class NewsViewModel with ChangeNotifier {
   final NewsRepository _newsRepo = NewsRepository();
 
   ApiResponse<List<NewsModel>> expressNewsList = ApiResponse.loading();
+  ApiResponse<List<NewsModel>> geoNewsList = ApiResponse.loading();
+  ApiResponse<List<NewsModel>> bolNewsList = ApiResponse.loading();
 
   setNewsList(ApiResponse<List<NewsModel>> data,
       {bool isExpress = false, bool isGeo = false, bool isBol = false}) {
     if (isExpress) {
       expressNewsList = data;
+    }
+    if (isGeo) {
+      geoNewsList = data;
+    }
+    if (isBol) {
+      bolNewsList = data;
     }
     notifyListeners();
   }

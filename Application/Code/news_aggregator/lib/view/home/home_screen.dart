@@ -4,6 +4,8 @@ import '../../data/responses/status.dart';
 import '../../resources/constants/style.dart';
 import '../../view_models/news/news_view_model.dart';
 import '../../widgets/home_news_card/home_news_card.dart';
+import '../../widgets/loading_indicator/my_loading_indicator.dart';
+import '../news_detail/news_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -70,12 +72,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                     title: news.title,
                                     description: news.description,
                                     thumbnail: news.featuredImg,
+                                    onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                NewsDetailScreen(
+                                                  news: news,
+                                                ))),
                                   );
                                 },
                               );
 
                             default:
-                              return const CircularProgressIndicator();
+                              return const MyLoadingIndicator();
                           }
                         },
                       );

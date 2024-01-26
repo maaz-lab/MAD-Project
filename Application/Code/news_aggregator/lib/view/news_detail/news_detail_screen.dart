@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-
+import '../../models/news/news_model.dart';
 import '../../resources/constants/style.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
+import '../../widgets/loading_image/loading_network_image.dart';
 
 class NewsDetailScreen extends StatelessWidget {
-  final String image, title, description;
   final String? newsLogo;
+  final NewsModel? news;
 
-  const NewsDetailScreen(
-      {super.key,
-      this.newsLogo,
-      required this.image,
-      required this.title,
-      required this.description});
+  const NewsDetailScreen({
+    super.key,
+    this.newsLogo,
+    this.news,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +25,29 @@ class NewsDetailScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(Style.padding),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(image),
+                if (news?.featuredImg != null) ...[
+                  LoadingNetworkImage(
+                    image: news?.featuredImg,
+                  ),
+                ],
+                if (news?.time != null) ...[
+                  Style.space10,
+                  Text(
+                    "Time: ${news?.time}",
+                    style: Style.heading.copyWith(
+                        color: Colors.redAccent, fontWeight: FontWeight.w600),
+                  ),
+                ],
                 Style.space10,
                 Text(
-                  title,
+                  news?.title ?? "",
                   style: Style.heading.copyWith(fontWeight: FontWeight.w600),
                 ),
                 Style.space10,
                 Text(
-                  description,
+                  news?.description ?? "",
                   style: Style.title,
                 ),
               ],

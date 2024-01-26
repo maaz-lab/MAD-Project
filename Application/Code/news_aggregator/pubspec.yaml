@@ -23,11 +23,27 @@ dependencies:
   # HTTP (Api Request)
   http: ^1.2.0
 
+  # Skeleton Animation
+  skeleton_text: ^3.0.1
+
+  # Chached Image
+  cached_network_image: ^3.3.1
+
+  # Path provider (chache storage path)
+  path_provider: ^2.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/logos/news_time_logo.png"
 
 flutter:
   uses-material-design: true

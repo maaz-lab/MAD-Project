@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../resources/constants/images.dart';
+import '../../models/news/news_model.dart';
 import '../../resources/constants/style.dart';
+import '../loading_image/loading_network_image.dart';
 
 class NewsCard extends StatelessWidget {
-  final String? title, description, thumbnail;
+  final NewsModel? news;
   final Function()? onTap;
 
-  const NewsCard(
-      {super.key, this.title, this.description, this.thumbnail, this.onTap});
+  const NewsCard({super.key, this.news, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class NewsCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    title ?? "",
+                    news?.title ?? "",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: Style.title.copyWith(fontWeight: FontWeight.w600),
@@ -35,16 +35,20 @@ class NewsCard extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        thumbnail ?? MyImages.noImage,
-                        height: 100,
-                        width: 100,
-                        fit: BoxFit.cover,
-                      ),
-                      Style.gap10,
+                      if (news?.featuredImg != null) ...[
+                        SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: LoadingNetworkImage(
+                            image: news?.featuredImg,
+                            boxfit: BoxFit.cover,
+                          ),
+                        ),
+                        Style.gap10,
+                      ],
                       Expanded(
                         child: Text(
-                          description ?? "",
+                          news?.description ?? "",
                           overflow: TextOverflow.ellipsis,
                           style: Style.body,
                           maxLines: 5,

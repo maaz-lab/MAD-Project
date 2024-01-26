@@ -77,16 +77,19 @@ class MainScreenState extends State<MainScreen> {
           children: [
             const HomeScreen(),
             NewsScreen(
+              isExpress: true,
               title: "Express News",
+              logo: MyLogos.expressNewsLogo,
+            ),
+            NewsScreen(
+              isGeo: true,
+              title: "Geo News",
               logo: MyLogos.geoNewsLogo,
             ),
             NewsScreen(
-              title: "Geo News",
-              logo: MyLogos.aryNewsLogo,
-            ),
-            NewsScreen(
+              isBol: true,
               title: "Bol News",
-              logo: MyLogos.samaaNewsLogo,
+              logo: MyLogos.bolNewsLogo,
             ),
           ],
         ),

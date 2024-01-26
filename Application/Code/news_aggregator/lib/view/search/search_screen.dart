@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../resources/constants/style.dart';
-import '../../resources/data/my_data.dart';
 import '../../widgets/app_bar/my_app_bar.dart';
-import '../../widgets/home_news_card/home_news_card.dart';
 import '../../widgets/search/my_search_bar.dart';
-import '../news_detail/news_detail_screen.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../resources/constants/images.dart';
 import '../../resources/constants/style.dart';
+import '../loading_image/loading_network_image.dart';
 
 class HomeNewsCard extends StatelessWidget {
   final String? title, description, thumbnail;
@@ -28,11 +28,14 @@ class HomeNewsCard extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                child: Image.network(
-                  thumbnail ?? MyImages.noImage,
+                child: SizedBox(
                   height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+                  child: LoadingNetworkImage(
+                    image: thumbnail,
+                    height: 200,
+                    width: double.infinity,
+                    boxfit: BoxFit.cover,
+                  ),
                 )),
             Padding(
               padding: EdgeInsets.all(Style.padding),

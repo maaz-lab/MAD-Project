@@ -51,18 +51,18 @@ class MyDrawer extends StatelessWidget {
                   backgroundColor: Colors.grey,
                 )),
             DrawerCard(
+              image: MyLogos.expressNewsLogo,
+              title: "Express Live",
+              onTap: () {},
+            ),
+            DrawerCard(
               image: MyLogos.geoNewsLogo,
               title: "Geo Live",
               onTap: () {},
             ),
             DrawerCard(
-              image: MyLogos.aryNewsLogo,
-              title: "Ary Live",
-              onTap: () {},
-            ),
-            DrawerCard(
-              image: MyLogos.samaaNewsLogo,
-              title: "Samaa Live",
+              image: MyLogos.bolNewsLogo,
+              title: "Bol Live",
               onTap: () {},
             ),
           ],
